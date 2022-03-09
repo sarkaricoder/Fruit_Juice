@@ -1,4 +1,4 @@
 #include<stdio.h>
 int main(){
-    printf("Lawda_lasun_Yashrajsingh");
+    printf("pratik is going to mingle");
 }
