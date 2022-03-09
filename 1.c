@@ -1,4 +1,4 @@
 #include<stdio.h>
 int main(){
-    printf("pratik chutiya");
+    printf("yash chutiya");
 }
