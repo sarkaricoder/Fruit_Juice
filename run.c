@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-
+//#include <graphics.h>
+//#include <dos.h>
 // function for login or exit
 
 int choice()
@@ -153,7 +154,7 @@ int mainmenu()
     printf("\n\n");
     printf("2. Update Prices\t\t5. Delete from inventory");
     printf("\n\n");
-    printf("3. Make new bill\n");
+    printf("3. Make new bill\t\t6. Exit");
     printf("\n\n");
     printf("Enter Here : ");
     scanf("%d", &n);
@@ -176,6 +177,9 @@ void checkprice()
     }
 
     printf("\n");
+    printf("H(Half) ---> 200ml\t\t\tF(Full) ---> 400ml");
+    printf("\n\n");
+
     printf("\t\t\t\tH(In Rs.)\tF(In Rs.)\t\t\t\t\t\tH(In Rs.)\tF(In Rs.)\n");
     printf("1. Lime/Soda\t\t--\t  20.00\t\t 30.00\t\t16. Pomogranate_Pizzaz\t\t--\t  60.00\t\t 100.00\n");
     printf("2. Papaya\t\t--\t  25.00\t\t 40.00\t\t17. Strawberry_Grape_Orange\t--\t  60.00\t\t 100.00\n");
@@ -194,7 +198,6 @@ void checkprice()
     printf("15.Apple\t\t--\t  50.00\t\t 80.00\t\t30. Strawberry_Pineaplle\t--\t  50.00\t\t  90.00\n");
     printf("\n\n");
     for (int i = 0; i < 130; i++)
-
     {
         printf("-");
     }
@@ -204,32 +207,45 @@ void checkprice()
 
 struct order
 {
-    char item[50];
+    int item;
     float price;
-    float quantity;
+    int quantity_h;
+    int quantity_f;
 };
 typedef struct order order;
 order r[30];
 
 void inventory(order *r)
 {
-    int n;
     printf("\n\n");
-    printf("Please enter the number of items : ");
+    printf("\t\t\t\t\t\t\t*** INVENTORY ***");
+    int n;
+     float h[30]={20.00,25.00,25.00,25.00,25.00,30.00,30.00,30.00,30.00,30.00,35.00,40.00,40.00,45.00,50.00,60.00,60.00,60.00,60.00,60.00,60.00,50.00,50.00,50.00,50.00,50.00,50.00,50.00,50.00,50.00};
+     float f[30]={30.00,40.00,40.00,40.00,40.00,50.00,50.00,50.00,50.00,50.00,60.00,70.00,70.00,80.00,80.00,100.00,100.00,100.00,100.00,100.00,100.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00,90.00};
+    printf("\n\n");
+    printf("Please enter the number of different types of juice coustomer want to purchases : ");
     scanf("%d", &n);
     // order odr[n];
     printf("\n");
     for (int i = 0; i < n; i++)
-    {
+    {   
+        int c;
         printf("\n");
-        printf("Please enter the item_%d : ", i + 1);
-        scanf("%s", r[i].item);
+        printf("***Item serial number is  Item's code**");
+        printf("\n\n");
+        printf("Please enter the item_%d code : ",i+1 );  
+        scanf("%d",&c);
+        
         printf("\n");
-        printf("Please enter the quantity : ");
-        scanf("%f", &r[i].quantity);
+        printf("Please enter the no. of half quantity : ");
+        scanf("%d", &r[i].quantity_h);
         printf("\n");
-        printf("Please enter the unit price : "); // unit price of juice
-        scanf("%f", &r[i].price);
+        printf("Please enter the no. of full quantity : ");
+        scanf("%d",&r[i].quantity_f);
+        float s=(r[i].quantity_h)*(h[c-1]) + (r[i].quantity_f)*(f[c-1]);
+        printf("\n");
+        printf("Total price of the %d item is %f :  ",i+1,s); // unit price of juice
+        
         printf("\n");
         for (int i = 0; i < 130; i++)
         {
@@ -238,7 +254,6 @@ void inventory(order *r)
         printf("\n");
     }
 }
-
 // main function
 
 int main()
@@ -251,6 +266,8 @@ int main()
     printf("\n");
     printf("\n");
     printf("\n");
+    //int gd=0,gm;
+    //initgraph(&gd,&gm,"")
     printf("\t\t\t\t\t\t*** FRESH SQUEEZE JUICE & BAR ***\n");
     printf("\n");
 
@@ -264,19 +281,37 @@ int main()
     printf("\n");
     printf("\n");
     int y = choice(); // variable to store return value of function choice
-    int n;
-    if (y == 1) // enters if user choose to login
+                      // int n=mainmenu();
+    if (y == 1)       // enters if user choose to login
     {
         int z = login(); // variable to store return value of function login
         if (z == 1)      // enters if username and password is correct
         {
+            int c;
+            int n = 1;
+            while (n)
+            {
+                n = mainmenu(); // function to display menu
 
-           mainmenu();
+                switch (n)
+                {
+                case 1:
+                    checkprice();
 
-           // if (n == 1)
-            checkprice();
-           // if (n == 2)
-            inventory(r);
+                    break;
+                case 2:
+
+                    inventory(r);
+
+                    break;
+                case 6:
+                    printf("\n\n\n");
+                    printf("\t\t\t\t\t\t *THANK YOU HAVE A NICE DAY* ");
+                    
+                     return 0;
+                    break;
+                }
+            }
         }
         if (z == 2)
         {
