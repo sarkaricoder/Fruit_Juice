@@ -203,9 +203,34 @@ void checkprice()
     {
         printf("-");
     }
+    printf("\n\n");
+    int m, n;
+    float p, q;
+    int a[30];
+    printf("Enter total number of items for price check"); // price checking
+    printf("\n\n");
+    printf("Enter here :- ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("\n\n");
+        printf("Enter code of item for price check");
+        printf("\n\n");
+        printf("Enter here :-");
+        scanf("%d", &a[i]); // price checking
+        p = f[a[i] - 1];
+        q = h[a[i] - 1];
+        printf("\n\n");
+
+        printf("Full Price of item of code_%d  :- %.2f", a[i], p);
+        printf("\n\n");
+        printf("Half price of item of code_%d  :- %.2f", a[i], q);
+        printf("\n\n");
+        m = 0;
+    }
 }
 
-// function for inventry
+// function for inventory
 
 struct order
 {
@@ -222,11 +247,11 @@ void inventory(order *r)
     printf("\n\n");
     printf("\t\t\t\t\t\t\t*** INVENTORY ***");
     int n;
-   
+
     printf("\n\n");
     printf("Please enter the number of different types of juice coustomer want to purchases : ");
     scanf("%d", &n);
-    
+
     printf("\n");
     for (int i = 0; i < n; i++)
     {
@@ -245,7 +270,7 @@ void inventory(order *r)
         scanf("%d", &r[i].quantity_f);
         float s = (r[i].quantity_h) * (h[c - 1]) + (r[i].quantity_f) * (f[c - 1]);
         printf("\n");
-        printf("Total price of the %d item is  : %f ", i + 1, s); // unit price of juice
+        printf("Total price of the %d item is  : %.2f ", i + 1, s); // unit price of juice
 
         printf("\n");
         for (int i = 0; i < 130; i++)
@@ -256,8 +281,6 @@ void inventory(order *r)
     }
 }
 // Function for update price
-
-
 
 struct update
 {
@@ -283,7 +306,7 @@ void updateprice(update *u)
         printf("Enter here :- ");
         scanf("%d", &m);
         printf("\n\n");
-        printf("Please select your option :- ");
+        printf("Please select your option :- "); // options for changes
         printf("\n");
         printf("1. Press '1' for make change in half.");
         printf("\n\n");
@@ -299,19 +322,19 @@ void updateprice(update *u)
 
         if (O == 1)
         {
-            printf("\n\n");
+            printf("\n\n"); // entering new price
             printf("Enter new price");
             printf("\n");
             printf("Enter here :- ");
-            scanf("%f", &u[i].half);
+            scanf("%.2f", &u[i].half);
             h[m - 1] = u[i].half;
         }
         else if (O == 2)
         {
-            printf("Enter new price");
+            printf("Enter new price"); // entering new price
             printf("\n");
             printf("Enter here :- ");
-            scanf("%f", &u[i].full);
+            scanf("%.2f", &u[i].full);
             f[m - 1] = u[i].full;
         }
         else if (O == 3)
@@ -319,13 +342,13 @@ void updateprice(update *u)
             printf("Enter new price for half");
             printf("\n");
             printf("Enter here :- ");
-            scanf("%f", &u[i].half);
+            scanf("%.2f", &u[i].half); // entering new prices
             h[m - 1] = u[i].half;
             printf("\n");
-            printf("Enter new price for half");
+            printf("Enter new price for full");
             printf("\n");
             printf("Enter here :- ");
-            scanf("%f", &u[i].full);
+            scanf("%.2f", &u[i].full);
             f[m - 1] = u[i].full;
         }
         else
@@ -369,6 +392,7 @@ int main()
         {
             int c;
             int n = 1;
+
             while (n)
             {
                 n = mainmenu(); // function to display menu
@@ -377,32 +401,31 @@ int main()
                 {
                 case 1:
                     checkprice();
-
-                    break;
-                case 4:
-
-                    inventory(r);
-
                     break;
                 case 2:
                     updateprice(u);
                     break;
+                case 4:
+                    inventory(r);
+                    break;
                 case 6:
                     printf("\n\n\n");
-                    printf("\t\t\t\t\t\t *THANK YOU HAVE A NICE DAY* ");
+                    printf("\t\t\t\t\t\t *** THANK YOU HAVE A NICE DAY ***");
 
                     return 0;
                     break;
                 }
             }
         }
+
         if (z == 2)
         {
             return 0;
         }
-    }
-    if (y == 2)
-    {
-        return 0;
+
+        if (y == 2)
+        {
+            return 0;
+        }
     }
 }
